@@ -1,7 +1,6 @@
-import items from "../mock.json";
 import FoodListItme from "./FoodListItme";
 
-export default function FoodList() {
+export default function FoodList({ items }) {
   return (
     <li>
       {items.map((item) => (

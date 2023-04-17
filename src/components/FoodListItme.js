@@ -1,3 +1,9 @@
 export default function FoodListItme({ item }) {
-  return <ul>{item.title}</ul>;
+  return (
+    <div>
+      <img src={item.imgUrl} alt={item.title} />
+      {item.title}
+      {item.content}
+    </div>
+  );
 }
