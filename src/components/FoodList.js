@@ -1,10 +1,11 @@
 import FoodListItme from "./FoodListItme";
+import "./FoodList.css";
 
-export default function FoodList({ items }) {
+export default function FoodList({ items, onDelete }) {
   return (
-    <li>
+    <li className="FoodList">
       {items.map((item) => (
-        <FoodListItme item={item} />
+        <FoodListItme item={item} onDelete={onDelete} />
       ))}
     </li>
   );
