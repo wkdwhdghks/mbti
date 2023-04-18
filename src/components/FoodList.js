@@ -3,10 +3,12 @@ import "./FoodList.css";
 
 export default function FoodList({ items, onDelete }) {
   return (
-    <li className="FoodList">
+    <ul className="FoodList">
       {items.map((item) => (
-        <FoodListItme item={item} onDelete={onDelete} />
+        <li key={item.id}>
+          <FoodListItme item={item} onDelete={onDelete} />
+        </li>
       ))}
-    </li>
+    </ul>
   );
 }
