@@ -1,3 +1,5 @@
+import styles from "./MBTISelect.module.css";
+
 const optionGroups = [
   [
     { value: "E", label: "외향형" },
@@ -18,19 +20,19 @@ const optionGroups = [
 ];
 
 function MBTIOption({ selected, label, value, onClick }) {
-  const style = { fontWeight: selected ? "bold" : "normal" };
+  const classNames = `${styles.mbtiOption} ${selected ? styles.selected : ""}`;
 
   return (
-    <span style={style} onClick={onClick}>
+    <div className={classNames} onClick={onClick}>
+      <span className={styles.char}>{value}</span>
       {label}
-      {value}
-    </span>
+    </div>
   );
 }
 
 function MBTIOptionGroup({ options, value, onChange }) {
   return (
-    <div>
+    <div className={styles.mbtiOptionGroup}>
       {options.map((option) => (
         <MBTIOption
           key={option.value}
@@ -45,17 +47,17 @@ function MBTIOptionGroup({ options, value, onChange }) {
 }
 
 export default function MBTISelect({ value = "ESTJ", onChange }) {
-  const handleChangeAt = (val, position) => {
+  function handleChangeAt(val, position) {
     const nextValue =
       value.slice(0, position) + val + value.slice(position + 1);
     onChange(nextValue);
-  };
+  }
 
   return (
     <div>
       {optionGroups.map((options, index) => (
         <MBTIOptionGroup
-          key={`${options[0].value} - ${options[1].value}`}
+          key={`${options[0].value}-${options[1].value}`}
           value={value[index]}
           options={options}
           onChange={(val) => handleChangeAt(val, index)}
