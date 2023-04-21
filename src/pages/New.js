@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import MBTISelect from "../components/MBTISelect";
 import generateColorCode from "../lib/generateColorCode";
 import ColorInput from "../components/ColorInput";
 import Button from "../components/Button";
+import axios from "../lib/axios";
 import styles from "./New.module.css";
 
 export default function New() {
@@ -11,6 +12,8 @@ export default function New() {
     mbti: "ESTJ",
     colorCode: "#000000",
   });
+
+  const navigate = useNavigate();
 
   function handleChange(name, value) {
     setFormValue((prevFormValue) => ({
@@ -24,9 +27,12 @@ export default function New() {
     handleChange("colorCode", nextColorCode);
   }
 
-  function handleSubmit() {
-    /** @FIXME */
-    console.log(formValue);
+  async function handleSubmit() {
+    await axios.post("/color-surveys/", {
+      ...formValue,
+      password: "0000",
+    });
+    navigate("/");
   }
 
   return (
